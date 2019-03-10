@@ -2,9 +2,9 @@ sudo: required
 services:
   - docker
 before_install:
-  - docker build -t kunwarluthera/python-flask-demo .
+  - docker build -t kunwarluthera/python-flask-demo-api .
 script:
-  - docker run kunwarluthera/python-flask-demo -- --coverage
+  - docker run kunwarluthera/python-flask-demo-api -- --coverage
 deploy:
   provider: elasticbeanstalk
   region: "us-east-1"
