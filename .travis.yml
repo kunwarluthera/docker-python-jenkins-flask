@@ -4,7 +4,7 @@ services:
 before_install:
   - docker build -t kunwarluthera/python-flask-demo-api .
 script:
-  - docker run kunwarluthera/python-flask-demo-api -- --coverage
+  - docker run kunwarluthera/python-flask-demo-api python app.py -- --coverage
 deploy:
   provider: elasticbeanstalk
   region: "us-east-1"
