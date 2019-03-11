@@ -6,13 +6,19 @@ import os
 #SECRET_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
 
 client = boto3.client('s3')#,aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'], region_name='us-east-1')
-
+s3 = boto3.client('iam')
 #print(client)
 app = Flask(__name__)
 
 @app.route("/")
 def hello():
     return "Hello World, this is my first python API inside docker"
+
+@app.route("/get-user")
+def getUser():
+    response = client.get_user()
+    print(response)
+    return response
 
 @app.route("/list-buckets")
 def buckets():
