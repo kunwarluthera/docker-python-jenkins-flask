@@ -8,8 +8,8 @@ script:
 deploy:
   provider: elasticbeanstalk
   region: "us-east-1"
-  app: "Docker-Python-flask"
-  env: "DockerPythonflask-env"
+  app: "docker-flask"
+  env: "DockerFlask-env"
   bucket_name: "elasticbeanstalk-us-east-1-738585724471"
   bucket_path: "docker-python"
   on:
