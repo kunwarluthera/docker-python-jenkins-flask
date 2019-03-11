@@ -3,7 +3,7 @@ import boto3
 import os
 
 client = boto3.client('s3')
-client_ec2 = boto3.client('ec2')
+client_ec2 = boto3.client('ec2',region_name='us-east-1')
 #print(client)
 app = Flask(__name__)
 
