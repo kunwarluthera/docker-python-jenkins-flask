@@ -6,13 +6,13 @@ This is a sample application in python which is created into a docker container 
 
 This demo demonstrates how we can use the DEV Flask WEB application having the python API calls to deploy on docker containers with the help of Dockerfile.dev and once validated/verified, we can later with the help of Dockerfile move the PROD code to production pipeline.
 
-# Another Enhancement
+## Another Enhancement
 
 Later we enhanced the code by adding the **Dockerrun.aws.json.**
 **This section describes how to prepare your Docker image and container for deployment to Elastic Beanstalk. Any web application that you deploy to Elastic Beanstalk in a single container Docker environment must include a Dockerfile or a Dockerrun.aws.json file.**
 
 **A Dockerrun.aws.json file is an Elastic Beanstalk-specific file that specifies how to deploy the set of Docker containers as an EB application. We use Dockerrun.aws.json for multicontainer docker environment.**
-### This in essense somewhat similar to docker-compose.yml which is used to multi container deployment.
+### This in essense is somewhat similar to docker-compose.yml which is also used for multi container deployment.
 
 **docker-compose.yml** is used for **DEV/TEST Env** deployments and **Dockerrun.aws.json** is used for **PROD** deployments.
 
@@ -24,16 +24,16 @@ With the use of **Dockerrun.aws.json.** we can remove the overhead of building t
 
 This requires following softwares -
 
-Flask
-
-boto3
-
-docker
+**Flask**
+**boto3**
+**docker**
 
 ## Other requirements include :-
 
-Travis CI
-
-Github 
+**AWS Account**
+**Travis CI**
+**Github** 
 
 AWS ElasticBeanstalk -- Make sure to update the default role created with elastic beanstalk for your boto3 API calls to work.
+
+## More Updates on the way
