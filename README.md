@@ -24,16 +24,41 @@ With the use of **Dockerrun.aws.json.** we can remove the overhead of building t
 
 This requires following softwares -
 
-**Flask**
-**boto3**
-**docker**
+**Flask,**
+**boto3,**
+**docker,**
 
 ## Other requirements include :-
 
-**AWS Account**
-**Travis CI**
+**AWS Account,**
+**Travis CI,**
 **Github** 
+**AWS ElasticBeanstalk** -- ***Make sure to update the default role created with elastic beanstalk for your boto3 API calls to work.***
 
-AWS ElasticBeanstalk -- Make sure to update the default role created with elastic beanstalk for your boto3 API calls to work.
+**SAMPLE CODE FOR MULTIPLE PARAMETERS IN FLASK***
+
+```@app.route("/admin")
+def admin():
+    service = request.args.get('service')
+    region = request.args.get('region')
+    print("type service  ",type(service))
+    my = client_method(service,region)
+    return 'Values returned '+ str(service) + str(region) +str(my)
+```
+
+**To Make a GET REQUEST**
+
+```
+http://localhost:5001/admin?service=s3&region=us-east-1
+
+```
+
+**To Make a POST Request using another python code**
+
+```
+import requests
+r = requests.post("http://127.0.0.1:5000/admin", data = {'service':'s3'},{'region':'us-east-1'})
+
+```
 
 ## More Updates on the way
