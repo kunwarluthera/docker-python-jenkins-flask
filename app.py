@@ -16,7 +16,9 @@ def hello():
 
 @app.route("/get-user")
 def getUser():
-    response = client.get_user()
+    response = s3.get_user()
+    res = s3.list_access_keys()
+    print(res)
     print(response)
     return response
 
