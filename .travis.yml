@@ -5,10 +5,14 @@ before_install:
   - docker build -t kunwarluthera/python-flask-demo-api .
 script:
   - docker run -d kunwarluthera/python-flask-demo-api python app.py -- --coverage
+after_success:
+  - docker build -t kunwarluthera/python-flask-demo-api .
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push kunwarluthera/python-flask-demo-api
 deploy:
   provider: elasticbeanstalk
   region: "us-east-1"
-  app: "docker-flask"
+  app: "multi-docker"
   env: "DockerFlask-env"
   bucket_name: "elasticbeanstalk-us-east-1-738585724471"
   bucket_path: "docker-python"

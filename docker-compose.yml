@@ -4,6 +4,8 @@ services:
     environment:
       - AWS_ACCESS_KEY_ID
       - AWS_SECRET_ACCESS_KEY
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     ports:
       - "5001:5000"

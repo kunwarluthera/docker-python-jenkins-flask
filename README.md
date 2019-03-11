@@ -17,3 +17,5 @@ docker
 Travis CI
 
 Github 
+
+AWS ElasticBeanstalk -- Make sure to update the default role created with elastic beanstalk for your boto3 API calls to work.
