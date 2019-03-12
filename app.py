@@ -14,9 +14,12 @@ client_ec2 = boto3.client('ec2',aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'
 #print(client)
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def hello():
-    return "My first python API inside docker"
+    if request.method == 'POST':
+        return "POST METHOD RECEIVED"
+    else:
+        return "My first python API inside docker"
 
 @app.route("/admin")
 def admin():

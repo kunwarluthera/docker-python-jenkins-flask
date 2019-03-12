@@ -57,8 +57,19 @@ http://localhost:5001/admin?service=s3&region=us-east-1
 
 ```
 import requests
-r = requests.post("http://127.0.0.1:5000/admin", data = {'service':'s3'},{'region':'us-east-1'})
+  
+url = 'http://localhost:5001/'
+data = {"eventType": "PORTAL_START", "data": {"uid": "hfe3hf45huf33545", "aid": "1", "vid": "1"}}
+params = {'sessionKey': '9ebbd0b25760557393a43064a92bae539d962103', 'format': 'xml', 'platformId': 1}
+r = requests.post(url, params=params, json=data)
+print(r.url)
+print(r.status_code, r.reason)
 
+
+-- Output
+
+http://localhost:5001/?sessionKey=9ebbd0b25760557393a43064a92bae539d962103&format=xml&platformId=1
+200 OK
 ```
 
 ## More Updates on the way
