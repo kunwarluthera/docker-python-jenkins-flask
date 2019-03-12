@@ -37,7 +37,8 @@ This requires following softwares -
 
 **SAMPLE CODE FOR MULTIPLE PARAMETERS IN FLASK***
 
-```@app.route("/admin")
+```
+@app.route("/admin")
 def admin():
     service = request.args.get('service')
     region = request.args.get('region')
