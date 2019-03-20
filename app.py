@@ -1,6 +1,11 @@
+# THIS IS IN DEV ENVIRONMENT
 from flask import Flask, request
 import boto3
 import os
+import time
+import redis
+
+
 
 ACCESS_KEY = os.environ['AWS_ACCESS_KEY_ID']
 SECRET_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
@@ -14,12 +19,48 @@ client_ec2 = boto3.client('ec2',aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'
 #print(client)
 app = Flask(__name__)
 
+cache =  redis.Redis(host='redis',port=6379)
+print(time.time())
+cache.set('users:test','lang: python, born:1990')
+#print(cache.get('WS39d962103'))
+def get_hit_count():
+    tries = 5
+    while True:
+        try:
+            return cache.incr('hits')
+        except redis.exceptions.ConnectionError as exec:
+            if tries == 0:
+                raise exec
+            tries -= 1
+            time.sleep(0.5)
+def set_chache_data(ws_no,service,region):
+    cache.set(ws_no,'service: '+service+', region:' + region)
+
+def get_cached_data(ws_no):
+    return cache.get(ws_no)
+
+@app.route("/requests", methods=['GET', 'POST'])
+def ws_requests():
+    ws_no = str(request.args.get('ws_no'))
+    service = str(request.args.get('service'))
+    region = str(request.args.get('region'))
+    data = get_cached_data(ws_no)
+    if request.method == 'POST':
+        if data == None:
+            set_chache_data(ws_no,service,region)
+            return "POST Method RECEIVED for "+ws_no
+        else:
+            return "Data exists for {} with details {}".format(ws_no,data)
+    else:
+        return "The else statement is for GET, which can be removed"
+
 @app.route("/", methods=['GET', 'POST'])
 def hello():
+    count = get_hit_count()
     if request.method == 'POST':
         return "POST METHOD RECEIVED"
     else:
-        return "My first python API inside docker"
+        return "MY FIRST Flask API inside docker, and I have seen {} times".format(count)
 
 @app.route("/admin")
 def admin():

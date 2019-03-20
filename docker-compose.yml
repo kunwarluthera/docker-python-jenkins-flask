@@ -1,5 +1,7 @@
 version: '3'
 services:
+  redis:
+    image: 'redis:alpine'
   python-dev-app:
     environment:
       - AWS_ACCESS_KEY_ID
@@ -7,5 +9,7 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: .
+    volumes:
+      - .:/usr/src/app
     ports:
       - "5001:5000"
