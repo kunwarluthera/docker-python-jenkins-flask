@@ -1,15 +1,12 @@
 pipeline {
     agent {
     // Equivalent to "docker build -f Dockerfile.build --build-arg version=1.0.2 ./build/
-    dockerfile {
-        filename 'Dockerfile.dev'
-        label 'kunwarluthera/python-jenkins-flask'
-    }
+    dockerfile true
 }
     stages {
         stage('Test') {
             steps {
-                sh 'docker run -d kunwarluthera/python-jenkins-flask python app.py -- --coverage'
+                sh 'echo hello world'
             }
         }
     }
