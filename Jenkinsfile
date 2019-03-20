@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'docker run -d kunwarluthera/python-flask-demo-api python app.py -- --coverage'
+                sh 'docker run -d kunwarluthera/python-jenkins-flask python app.py -- --coverage'
             }
         }
     }
